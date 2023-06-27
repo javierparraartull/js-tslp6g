@@ -6,8 +6,8 @@ const risoColors = require('riso-colors'); //Importamos la biblioteca de RisoCol
 
 
 const settings = {
-  //dimensions: [1080,1080],
-  dimensions: 'A3',
+  dimensions: [1080,1080],
+  //dimensions: 'A3',
   //pixelsPerInch:300,
   animate:true,  
 };
@@ -68,20 +68,31 @@ const sketch = ({context,width,height}) => {
       context.fillStyle = bgColor;
       context.fillRect(0,0,width,height);
 
+      
+
       context.save();
       context.translate(width*0.5,height*0.5);
-      context.translate(x,y);
+     // context.translate(x,y);
 
-      context.beginPath();
-      context.moveTo(0,-300);
-      context.lineTo(300,200);
-      context.lineTo(-300,200)
-      context.closePath();
+     //DIBUJAMOS TRIANGULO DE RECORTE
 
+      //context.beginPath();
+      //context.moveTo(0,-300);
+      //context.lineTo(300,200);
+      //context.lineTo(-300,200)
+      //context.closePath();
+
+      //DIBUJAMOS POLIGONO DE RECORTE
+
+      drawPolygon({context, radius:400, sides:3});
+      
       context.lineWidth=10;
       context.strokeStyle='black';
       context.stroke();
+      context.restore();
       context.clip();
+
+      
 
       rects.forEach(rect => {
 
@@ -159,6 +170,20 @@ context.closePath();
 context.stroke(); 
 
 context.restore();
+
+}
+
+const drawPolygon= ({context, radius=100, sides=3}) => {
+  const slice = Math.PI * 2 / sides; //Segmento
+  context.beginPath();
+  context.moveTo(0,-radius);
+for (let i=1;i < sides; i++){
+  const theta=i*slice;
+  context.lineTo(Math.cos(theta)*radius, Math.sin(theta)*radius);
+
+}
+
+context.closePath();
 
 }
 

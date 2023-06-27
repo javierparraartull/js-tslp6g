@@ -9,7 +9,7 @@ const settings = {
   //dimensions: [1080,1080],
   dimensions: 'A3',
   //pixelsPerInch:300,
-  animate:true,
+  animate:true,  
 };
 
 const sketch = ({context,width,height}) => {

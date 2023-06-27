@@ -39,6 +39,16 @@ const sketch = ({context,width,height}) => {
  
   const bgColor = random.pick(rectColors).hex;
 
+  const mask = {
+
+      radius: width *0.4,
+      sides:3,
+      x: width *0.5,
+      y: height * 0.5,
+
+
+  };
+
   for (let i=0; i < num; i++){
 
     x=random.range(0,width),
@@ -71,6 +81,7 @@ const sketch = ({context,width,height}) => {
       
 
       context.save();
+      context.translate (mask.x, mask.y);
       context.translate(width*0.5,height*0.5);
      // context.translate(x,y);
 
@@ -84,11 +95,9 @@ const sketch = ({context,width,height}) => {
 
       //DIBUJAMOS POLIGONO DE RECORTE
 
-      drawPolygon({context, radius:400, sides:3});
-      
-      context.lineWidth=10;
-      context.strokeStyle='black';
-      context.stroke();
+      drawPolygon({context, radius:mask.radius, sides:mask.sides});
+
+     
       context.restore();
       context.clip();
 
@@ -101,7 +110,7 @@ const sketch = ({context,width,height}) => {
         const {x,y,w,h,fill,stroke,blend}=rect;
         let shadowColor; //Variable para la sombra de color
         context.save();
-        context.translate (x,y);
+        context.translate (mask.x,mask.y);
         context.strokeStyle = stroke;  //Estilo del trazo
         context.fillStyle = fill;      //Estilo de relleno
         context.lineWidth = 10;        //Grosor del trazo de la linea
@@ -143,6 +152,18 @@ const sketch = ({context,width,height}) => {
     
       context.restore();
 
+      context.save();
+      context.translate(mask.x,mask.y);
+
+      drawPolygon({context, radius:mask.radius, sides:mask.sides});
+
+      
+      context.lineWidth=10;
+      context.strokeStyle='black';
+      context.stroke();
+      context.stroke();
+
+
 
 
     };
@@ -178,7 +199,7 @@ const drawPolygon= ({context, radius=100, sides=3}) => {
   context.beginPath();
   context.moveTo(0,-radius);
 for (let i=1;i < sides; i++){
-  const theta=i*slice;
+  const theta=i*slice - Math.PI * 0.5; // Con el Math.PI*0.5 empezamos a las 12 como punto de partida. 0 grados son las 3
   context.lineTo(Math.cos(theta)*radius, Math.sin(theta)*radius);
 
 }

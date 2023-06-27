@@ -98,7 +98,7 @@ const sketch = ({context,width,height}) => {
       drawPolygon({context, radius:mask.radius, sides:mask.sides});
 
      
-      context.restore();
+     // context.restore();
       context.clip();
 
       
@@ -155,13 +155,13 @@ const sketch = ({context,width,height}) => {
       context.save();
       context.translate(mask.x,mask.y);
 
-      drawPolygon({context, radius:mask.radius, sides:mask.sides});
+     drawPolygon({context, radius:mask.radius, sides:mask.sides});
 
       
       context.lineWidth=10;
       context.strokeStyle='black';
       context.stroke();
-      context.stroke();
+      context.restore();
 
 
 

@@ -119,7 +119,7 @@ const sketch = ({context,width,height}) => {
 
       context.beginPath();
       context.moveTo(0,-300);
-      context.lineto(300,200);
+      context.lineTo(300,200);
       context.lineTo(-300,200)
       context.closePath();
 

@@ -32,7 +32,7 @@ const sketch = ({context,width,height}) => {
 
     random.pick(risoColors),
     random.pick(risoColors),
-    random.pick(risoColors),
+   // random.pick(risoColors),
   ];
 
   //Elegimos un color de fondo  
@@ -43,8 +43,8 @@ const sketch = ({context,width,height}) => {
 
     x=random.range(0,width),
     y=random.range(0,height),
-    w=random.range(200,600),
-    h=random.range(40,200);
+    w=random.range(400,600),
+    h=random.range(20,200);
 
 
    //Relleno con colores aleatorios formato RGBA = RGB+tranparencia
@@ -74,12 +74,11 @@ const sketch = ({context,width,height}) => {
 
         const {x,y,w,h,fill,stroke,blend}=rect;
         let shadowColor; //Variable para la sombra de color
-
         context.save();
         context.translate (x,y);
         context.strokeStyle = stroke;  //Estilo del trazo
         context.fillStyle = fill;      //Estilo de relleno
-        context.lineWidth = 5;        //Grosor del trazo de la linea
+        context.lineWidth = 10;        //Grosor del trazo de la linea
 
         context.globalCompositeOperation = blend;
         
@@ -113,7 +112,24 @@ const sketch = ({context,width,height}) => {
         context.restore();
 
 
-      })
+      });
+
+      context.save();
+      context.translate(width*0.5,height*0.5);
+
+      context.beginPath();
+      context.moveTo(0,-300);
+      context.lineto(300,200);
+      context.lineTo(-300,200)
+      context.closePath();
+
+      context.lineWidth=10;
+      context.strokeStyle='black';
+      context.stroke();
+
+      context.restore();
+
+
 
     };
 

@@ -68,6 +68,21 @@ const sketch = ({context,width,height}) => {
       context.fillStyle = bgColor;
       context.fillRect(0,0,width,height);
 
+      context.save();
+      context.translate(width*0.5,height*0.5);
+      context.translate(x,y);
+
+      context.beginPath();
+      context.moveTo(0,-300);
+      context.lineTo(300,200);
+      context.lineTo(-300,200)
+      context.closePath();
+
+      context.lineWidth=10;
+      context.strokeStyle='black';
+      context.stroke();
+      context.clip();
+
       rects.forEach(rect => {
 
         //PREPARAMOS EL RECTÁNGULO
@@ -114,19 +129,7 @@ const sketch = ({context,width,height}) => {
 
       });
 
-      context.save();
-      context.translate(width*0.5,height*0.5);
-
-      context.beginPath();
-      context.moveTo(0,-300);
-      context.lineTo(300,200);
-      context.lineTo(-300,200)
-      context.closePath();
-
-      context.lineWidth=10;
-      context.strokeStyle='black';
-      context.stroke();
-
+    
       context.restore();
 
 
